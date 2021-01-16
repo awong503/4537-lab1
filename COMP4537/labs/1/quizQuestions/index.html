@@ -5,7 +5,9 @@
     <title>COMP4537 - Lab 1 Hardcoded Quiz</title>
 
     
-    <link rel='stylesheet' type="text/css" href="css/style.css">
+    <link rel='stylesheet' type="text/css" href="../../../../css/style.css">
+
+    <script type="text/JavaScript" src="../../../../js/index.js"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -38,61 +40,93 @@
     <div class="container">
         <h2>Lab 1 Quiz</h2>
         <ul class="list-group">
-          <li class="list-group-item list-group-item-action class=">1) Question1
+          <li class="list-group-item list-group-item-action class=">1) OR <code>||</code> operator can be used in the same as <code>??</code>
             <div class="radio">
-                <label><input type="radio" name="optradio" checked>False</label>
+                <label><input type="radio" name="optradio1" checked>False</label>
               </div>
               <div class="radio">
-                <label><input type="radio" name="optradio">True</label>
+                <label><input type="radio" name="optradio1">True</label>
               </div>
+              <button type="submit-btn" class="btn btn-primary" onclick="viewAns('a1')">See Answer</button>
+              <div class="answer" id="a1">Answer: True</div>
           </li>
 
-          <li class="list-group-item list-group-item-action class=">2) Question1
+          <li class="list-group-item list-group-item-action class=">2) Difference between || and ?? <br>
+              a) <code>||</code> returns the first falsey value. <br>
+              b) <code>||</code> returns the first truthy value. <br>
+              c) <code>??</code> returns the first defined value <br>
+              d) <code>??</code> returns the last defined value
             <div class="radio">
-                <label><input type="radio" name="optradio" checked>False</label>
+                <label><input type="radio" name="optradio2" checked>b & c</label>
               </div>
               <div class="radio">
-                <label><input type="radio" name="optradio">True</label>
+                <label><input type="radio" name="optradio2">a & d</label>
               </div>
+              <div class="radio">
+                <label><input type="radio" name="optradio2">a & c</label>
+              </div>
+              <div class="radio">
+                <label><input type="radio" name="optradio2">b & d</label>
+              </div>
+              <button type="submit-btn" class="btn btn-primary" onclick="viewAns('a2')">See Answer</button>
+              <div class="answer" id="a2">Answer: b & c</div>
           </li>
 
-          <li class="list-group-item list-group-item-action class=">3) Question1
+          <li class="list-group-item list-group-item-action class=">3) True or False? It’s forbidden to use <code>??</code> with <code>||</code> or <code>&&</code> without explicit parentheses.
             <div class="radio">
-                <label><input type="radio" name="optradio" checked>False</label>
+                <label><input type="radio" name="optradio3" checked>True</label>
               </div>
               <div class="radio">
-                <label><input type="radio" name="optradio">True</label>
+                <label><input type="radio" name="optradio3">False</label>
               </div>
+              <button type="submit-btn" class="btn btn-primary" onclick="viewAns('a3')">See Answer</button>
+              <div class="answer" id="a3">Answer: True</div>
           </li>
 
-          <li class="list-group-item list-group-item-action class=">4) Question1
+          <li class="list-group-item list-group-item-action class=">4) True or False? The snippets below are interchangable. <br>
+            <code>let</code> sum = (a, b) => a + b; <br> <br>
+
+            <code>let</code> sum = function(a, b) { return a + b;};
+
             <div class="radio">
-                <label><input type="radio" name="optradio" checked>False</label>
+                <label><input type="radio" name="optradio4" checked>True</label>
               </div>
               <div class="radio">
-                <label><input type="radio" name="optradio">True</label>
+                <label><input type="radio" name="optradio4">False</label>
               </div>
+              <button type="submit-btn" class="btn btn-primary" onclick="viewAns('a4')">See Answer</button>
+              <div class="answer" id="a4">Answer: True</div>
           </li>
 
-          <li class="list-group-item list-group-item-action class=">5) Question1
+          <li class="list-group-item list-group-item-action class=">5) It is possible use arrow functions to create empty parameter functions like below? <br>
+
+            <code>let</code> sayHi = () => alert("Hello!"); <br>
+            sayHi();
             <div class="radio">
-                <label><input type="radio" name="optradio" checked>False</label>
+                <label><input type="radio" name="optradio5" checked>False</label>
               </div>
               <div class="radio">
-                <label><input type="radio" name="optradio">True</label>
+                <label><input type="radio" name="optradio5">True</label>
               </div>
+              <button type="submit-btn" class="btn btn-primary" onclick="viewAns('a5')">See Answer</button>
+              <div class="answer" id="a5">Answer: True</div>
           </li>
 
-          <li class="list-group-item list-group-item-action class=">6) Question1
+          <li class="list-group-item list-group-item-action class=">6) Multiline arrow functions do NOT require curly braces.
             <div class="radio">
-                <label><input type="radio" name="optradio" checked>False</label>
+                <label><input type="radio" name="optradio6" checked>True</label>
               </div>
               <div class="radio">
-                <label><input type="radio" name="optradio">True</label>
+                <label><input type="radio" name="optradio6">False</label>
               </div>
+              <button type="submit-btn" class="btn btn-primary" onclick="viewAns('a6')">See Answer</button>
+              <div class="answer" id="a6">Answer: False</div>
           </li>
 
         </ul>
+
+
+        <a href="../../../../index.html" class="btn btn-primary">Back to Home</a>
       </div>
 </body>
 </html>
