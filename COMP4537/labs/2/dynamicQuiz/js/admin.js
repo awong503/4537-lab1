@@ -87,6 +87,8 @@ function createMCform() {
     let addButton = new createButton("Add", "btn btn-success");
     let saveButton = new createButton("Save changes", "btn btn-primary");
     let delButton = new createButton("Delete", "btn btn-danger");
+
+    let backBtn = new createButton("Back", "btn btn-info");
     childForm.innerHTML = `
 <label for="Question">Create Question:</label>
 <textarea id="question" name="question" class="form-control questionText" rows="5"></textarea> </br>
@@ -145,10 +147,15 @@ function createMCform() {
         displayQuestions();
     });
 
+    backBtn.btn.addEventListener('click', () => {
+        location.href="index.html";
+    });
+
     parent[0].appendChild(childForm);
     parent[0].appendChild(addButton.btn);
     parent[0].appendChild(saveButton.btn);
     parent[0].appendChild(delButton.btn);
+    parent[0].appendChild(backBtn.btn);
 }
 
 function pushUserInputValues() {
@@ -178,7 +185,7 @@ function pushUserInputValues() {
     for (let i = 0; i < answers.length; i++) {
         answers[i].value = "";
     }
-    let mc = new MultipleChoiceQuestion(question.value, correctAns);
+    let mc = new MultipleChoiceQuestion(question, correctAns);
     mc.setQuestionsArr(ans);
     pushData(mc);
 }
