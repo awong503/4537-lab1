@@ -1,9 +1,5 @@
 
 window.onload = () => {
-    if (getArray().length == 0) {
-        window.alert("There are no questions created for the quiz.");
-        return;
-    }
     createElementDocument("div", "container-fluid text-left")
     createElementDocument("div", "form");
     quizInit();
@@ -12,6 +8,10 @@ window.onload = () => {
 
 function quizInit() {
     displayQuiz();
+    if (getArray().length == 0) {
+        window.alert("There are no questions created for the quiz.");
+        return;
+    }
 }
 
 
