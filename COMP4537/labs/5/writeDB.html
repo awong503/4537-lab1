@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script type="text/javascript" src="../5/src/dbhandler.js"></script> -->
+    <title>Write DB</title>
+</head>
+<body>
+    <div id="main-div">
+    <form id="wr-form">
+        <label for="name">Full name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="score">Score:</label><br>
+        <input type="number" id="score" name="score"><br><br>
+      </form> 
+      <input type="button" value="Store to Database" id='submit-btn' onclick="getReq('https://o2-comp4537-lab5.herokuapp.com')">
+      <p id="msg"></p>
+    </div>
+</body>
+
+<script>
+
+const getReq = (url) => {
+    let xhttp = new XMLHttpRequest();
+    let inputValues = getForm('wr-form');
+
+    console.log(`${inputValues.firstName} and ${inputValues.score}`);
+    xhttp.onreadystatechange = () => {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById('msg').value = "Sent";
+        }
+    };
+
+    xhttp.open("GET", `${url}/?name=${inputValues.firstName}&score=${inputValues.score}`, true);
+    xhttp.send();
+    xhttp.onload = function() {
+        let res = xhttp.response;
+        let resDiv = document.getElementById("msg");
+        resDiv.innerHTML = res;
+      };
+    
+}
+const getForm = formId => {
+    let form = document.getElementById(formId);
+    let inputObj = {
+        firstName: form[0].value,
+        score: parseInt(form[1].value) || 0
+    }
+    return inputObj;
+}
+
+</script>
+</html>
