@@ -11,10 +11,10 @@
     </div>
     <script>
       const xhttp = new XMLHttpRequest();
-      console.log("1");
+
       xhttp.open("GET", "https://o2-comp4537-lab5.herokuapp.com/read", true);
       xhttp.responseType = "json";
-      console.log("2");
+
       xhttp.send();
       xhttp.onload = function() {
         let res = xhttp.response;
