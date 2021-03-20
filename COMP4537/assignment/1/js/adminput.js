@@ -46,7 +46,7 @@ function displayQuiz(data) {
         childForm.id = `form-${qnum}`
         let childFormString =  `
             <button type="submit" id=`+qnum+`>Update Question `+ qnum +`</button>
-            <input text="text" id="question`+qnum+`" name="question" class="form-control questionText" value="`+obj.question+`"> </br>
+            <input required text="text" id="question`+qnum+`" name="question" class="form-control questionText" value="`+obj.question+`"> </br>
         `;
         for (let i = 0; i < data.length; i++) {
             let correctStatus = "";
