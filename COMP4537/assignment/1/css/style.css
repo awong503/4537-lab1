@@ -1,0 +1,26 @@
+.container {
+    justify-content: center;
+  }
+
+.btn-group {
+  width: 100%;
+}
+
+.btn-ops {
+  width: 50%;
+  
+}
+
+.backIcon {
+	position: fixed;
+	top:    10px;
+	left:   20px;
+	margin: 0px;
+	height: 40px;
+	opacity: 0.7;
+}
+
+.backIcon:hover {
+	opacity: 1;
+	transform: scale(1.1,1.1);
+}

@@ -1,0 +1,149 @@
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>User Page</title>
+    <script type="text/javascript" src="js/user.js"></script>
+    <link rel='stylesheet' type="text/css" href="css/user.css">
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   </head>
+<body>
+</body>
+<script>
+window.onload = () => {
+    createElementDocument("div", "container-fluid text-left")
+    createElementDocument("div", "form");
+    let quiz_data;
+    let request = new XMLHttpRequest();
+    request.open("GET", `https://isa-dbquiz.herokuapp.com/questions`, true);
+    request.responseType = "json";
+    request.setRequestHeader("Access-Control-Allow-Origin", "*");
+    request.onload = () => {
+        console.log(request.response);
+        quiz_data = request.response;
+        quizInit(quiz_data)
+    }
+    request.send();
+
+}
+
+function quizInit(data) {
+    if (data.length == 0 ?? null) {
+        window.alert("There are no questions created for the quiz.");
+        return;
+    }
+    displayQuiz(data);
+}
+
+
+function displayQuiz(data) {
+    let storedQuestions = new Set();
+    let parent = document.getElementsByClassName("form");
+    let submitBtn = new createButton("Submit", "btn btn-success");
+    let backBtn = new createButton("Back", "btn btn-info");
+
+    data.forEach(element => {
+        let questionData = {
+            "question"    : element.question,
+            "question_id" : element.question_id,
+        };
+        
+        storedQuestions.add(JSON.stringify(questionData));
+    });
+
+    let storedQuestionsArr = [...storedQuestions];
+    for (let i = 0; i < storedQuestionsArr.length; i++) {
+        let obj = JSON.parse(storedQuestionsArr[i]);
+        let qnum = obj.question_id;
+        // questionObj["question"]
+        // questionObj["answerArr"][0] 
+        let childForm = document.createElement("form");
+        let childFormString =  `
+            <label for="Question">Question `+ qnum +`:</label>
+            <textarea disabled id="question" name="question" class="form-control questionText" rows="5">`+ obj.question +`</textarea> </br>
+        `;
+
+        for (let i = 0; i < data.length; i++) {
+            let correctStatus = "";
+            if (qnum === data[i].question_id) {
+                console.log(0);
+                if (data[i].iscorrect == true) {
+                correctStatus += "correct";
+                }
+                childFormString += `
+                <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                    <input type="radio" class="radio-choice ` + correctStatus + `Choice"  aria-label="Radio button for following text input" name="answer" value="ans_1">
+                    </div>
+                </div>
+                <input type="text" disabled class="form-control answerText ` + correctStatus + `Text" aria-label="Text input with radio button" value="` + data[i].option_desc + `">
+                </div>
+            `;
+            childForm.innerHTML = childFormString;
+            parent[0].appendChild(childForm);
+            }
+            
+
+ 
+        }
+
+    }
+        submitBtn.btn.addEventListener('click', () => {
+            let correctChoices = document.getElementsByClassName("correctChoice");
+            let choices = document.getElementsByClassName("Choice");
+            let correctTexts = document.getElementsByClassName("correctText");
+            let userScore = 0;
+            for (let i = 0; i < correctTexts.length; i++) {
+                correctTexts[i].style = "background-color: rgba(40,180,0,0.8); color: white";
+            }
+
+            for (let i = 0; i < correctChoices.length; i++) {
+                if (correctChoices[i].checked) {
+                    userScore++;
+                }
+                correctChoices[i].disabled = !(correctChoices[i].checked);
+
+            }
+            console.log("Correct: " + userScore + " Wrong: " + (storedQuestionsArr.length-userScore));
+            window.alert("Correct: " + userScore + " Wrong: " + (storedQuestionsArr.length-userScore));
+
+            for (let i = 0; i < choices.length; i++) {
+                choices[i].disabled = !(choices[i].checked);
+            }        
+        });
+
+        backBtn.btn.addEventListener('click', () => {
+            location.href="index.html";
+        });
+        parent[0].appendChild(submitBtn.btn);
+        parent[0].appendChild(backBtn.btn);
+
+}
+
+
+
+
+function createElementDocument(e, className) {
+    let element = document.createElement(e);
+    element.className = className;
+    document.body.appendChild(element);
+}
+
+
+function createButton(innerHTML, className) {
+    this.btn = document.createElement("button");
+    this.btn.innerHTML = innerHTML;
+    this.btn.className = className;
+}
+</script>
+</html>
